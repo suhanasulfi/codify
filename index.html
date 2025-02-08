@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Scheduler</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #261d04;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .task-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        input, select, button {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        select {
+            background-color: white;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-item {
+            display: grid;
+            grid-template-columns: auto 150px 150px 120px 100px;
+            gap: 10px;
+            align-items: center;
+            padding: 15px;
+            margin: 8px 0;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+
+        .task-item.high-priority {
+            border-left-color: #e74c3c;
+        }
+
+        .task-item.medium-priority {
+            border-left-color: #f39c12;
+        }
+
+        .task-item.low-priority {
+            border-left-color: #27ae60;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            padding: 8px 12px;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .status-pending {
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        .status-in-progress {
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .status-completed {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-header {
+            display: grid;
+            grid-template-columns: auto 150px 150px 120px 100px;
+            gap: 10px;
+            padding: 10px 15px;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Task Scheduler</h1>
+        
+        <div class="task-form">
+            <input type="text" id="taskInput" placeholder="Enter task description">
+            <input type="datetime-local" id="dateInput">
+            <select id="priorityInput">
+                <option value="low">Low Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="high">High Priority</option>
+            </select>
+            <select id="assigneeInput">
+                <option value="">Assign to...</option>
+                <option value="Suhana PS">Suhana PS</option>
+                <option value="Fasalul Fidha">Fasalul Fidha</option>
+                <option value="Shahna Sherin">Shahna Sherin</option>
+                <option value="Jumana Jalal">Jumana Jalal</option>
+            </select>
+            <select id="statusInput">
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+            <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <div class="filters">
+            <select id="filterPriority" onchange="filterTasks()">
+                <option value="all">All Priorities</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+            </select>
+            <select id="filterStatus" onchange="filterTasks()">
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+            <select id="filterAssignee" onchange="filterTasks()">
+                <option value="all">All Assignees</option>
+                <option value="Suhana PS">Suhana PS</option>
+                <option value="Fasalul Fidha">Fasalul Fidha</option>
+                <option value="Shahna Sherin">Shahna Sherin</option>
+                <option value="Jumana Jalal">Jumana Jalal</option>
+            </select>
+        </div>
+
+        <div class="task-header">
+            <div>Task Description</div>
+            <div>Due Date</div>
+            <div>Assignee</div>
+            <div>Status</div>
+            <div>Action</div>
+        </div>
+
+        <ul id="taskList" class="task-list">
+            <!-- Tasks will be added here -->
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const dateInput = document.getElementById('dateInput');
+            const priorityInput = document.getElementById('priorityInput');
+            const assigneeInput = document.getElementById('assigneeInput');
+            const statusInput = document.getElementById('statusInput');
+            const taskList = document.getElementById('taskList');
+
+            if (taskInput.value.trim() === '' || dateInput.value === '' || assigneeInput.value === '') {
+                alert('Please fill in all required fields!');
+                return;
+            }
+
+            const li = document.createElement('li');
+            li.className = `task-item ${priorityInput.value}-priority`;
+            li.setAttribute('data-priority', priorityInput.value);
+            li.setAttribute('data-status', statusInput.value);
+            li.setAttribute('data-assignee', assigneeInput.value);
+
+            const date = new Date(dateInput.value);
+            const formattedDate = date.toLocaleString();
+
+            li.innerHTML = `
+                <div>${taskInput.value}</div>
+                <div>${formattedDate}</div>
+                <div>${assigneeInput.value}</div>
+                <div class="status-${statusInput.value}">${statusInput.value.replace('-', ' ').toUpperCase()}</div>
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            `;
+
+            taskList.appendChild(li);
+
+            // Clear inputs
+            taskInput.value = '';
+            dateInput.value = '';
+            priorityInput.value = 'low';
+            assigneeInput.value = '';
+            statusInput.value = 'pending';
+        }
+
+        function filterTasks() {
+            const priorityFilter = document.getElementById('filterPriority').value;
+            const statusFilter = document.getElementById('filterStatus').value;
+            const assigneeFilter = document.getElementById('filterAssignee').value;
+            const tasks = document.getElementsByClassName('task-item');
+
+            for (let task of tasks) {
+                const matchesPriority = priorityFilter === 'all' || task.getAttribute('data-priority') === priorityFilter;
+                const matchesStatus = statusFilter === 'all' || task.getAttribute('data-status') === statusFilter;
+                const matchesAssignee = assigneeFilter === 'all' || task.getAttribute('data-assignee') === assigneeFilter;
+
+                task.style.display = (matchesPriority && matchesStatus && matchesAssignee) ? '' : 'none';
+            }
+        }
+    </script>
+</body>
+</html>
