@@ -1,14 +1,14 @@
-# [Project Name] 🎯
+# [Task Sheduler] 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: [Codify]
 
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Member 1: [Suhana PS] - [Ilahia College of Engineering and Technology]
+- Member 2: [Faslul fidha] - [Ilahia College of Engineering and Technology]
+- Member 3: [Shahna Sherin] - [Ilahia College of Engineering and Technology]
 
 ### Hosted Project Link
 [mention your project hosted project link here]
