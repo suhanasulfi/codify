@@ -7,7 +7,7 @@
 
 ### Team Members
 - Member 1: [Suhana PS] - [Ilahia College of Engineering and Technology]
-- Member 2: [Fasalul Fidha_pp] - [Ilahia College of Engineering and Technology]
+- Member 2: [Fasalul Fidha pp] - [Ilahia College of Engineering and Technology]
 - Member 3: [Shahna Sherin] - [Ilahia College of Engineering and Technology]
 
 ### Hosted Project Link
