@@ -53,13 +53,13 @@ start index.html  # (Windows)]
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshort 2025-02-09 082332.png](Add screenshot 1 here with proper name)
+![Screenshort 2025-02-09 082332.png](https://github.com/suhanasulfi/codify/blob/master/image/Screenshot%202025-02-09%20%20098652.png.jpeg)
 *Add caption explaining what this shows*
 
-![Screenshot 2025-02-09 092141](Add screenshot 2 here with proper name)
+![Screenshot 2025-02-09 092141](https://github.com/suhanasulfi/codify/blob/master/image/Screenshot%202025-02-09%20082332.png)
 *Add caption explaining what this shows*
 
-![Screenshot 2025-02-09 098652.png.jpeg](Add screenshot 3 here with proper name)
+![Screenshot 2025-02-09 098652.png.jpeg](https://github.com/suhanasulfi/codify/blob/master/image/Screenshot%202025-02-09%20092141.png)
 *Add caption explaining what this shows*
 
 # Diagrams
