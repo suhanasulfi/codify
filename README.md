@@ -69,7 +69,7 @@ For Software:
 
 
 # Build Photos
-![Team](Add photo of your team here)
+![Team](https://drive.google.com/file/d/1GnfaDs59cmOUyOLh8a2rzuhtIFbhE53W/view?usp=sharing)
 
 
 ### Project Demo
